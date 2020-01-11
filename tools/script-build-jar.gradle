@@ -1,11 +1,11 @@
 version = '1.0'
 
-//create a single Jar with all dependencies
 task fatJar(type: Jar) {
     manifest {
         attributes 'Main-Class': 'com.rakangsoftware.kotlin2jar.MainKt'
     }
+    classifier = 'all'
     baseName = 'kotlin-jar-template'
-    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    from { configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) } }
     with jar
 }
